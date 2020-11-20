@@ -61,7 +61,8 @@ namespace Offers.Api
                 endpoints.MapControllers();
             });
 
-            await ContextsMigrationManager.MigrateContextsAsync(app.ApplicationServices);
+            if(!env.IsEnvironment("Test"))
+                await ContextsMigrationManager.MigrateContextsAsync(app.ApplicationServices);
         }
     }
 }

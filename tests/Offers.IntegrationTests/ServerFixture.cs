@@ -17,10 +17,14 @@ namespace Offers.IntegrationTests
         public HttpClient Client { get; }
         public ServerFixture()
         {
-            var server = new TestServer(new WebHostBuilder().UseEnvironment("Test")
-                    .ConfigureAppConfiguration((hosting, config) => { config.AddJsonFile("appsettings.Development.json"); })
+            var server = new TestServer(new WebHostBuilder()
+                    .UseEnvironment("Test")
+                    .ConfigureAppConfiguration((hosting, config) => { 
+                        config.AddJsonFile("appsettings.json");
+                        config.AddJsonFile("appsettings.Development.json");
+                    })
                     .UseStartup<Startup>()
-                    .ConfigureServices(services => 
+                    .ConfigureTestServices(services => 
                         services.AddSingleton(x => new DbContextOptionsBuilder<OffersContext>().UseInMemoryDatabase("OffersTest").Options)
                     ));
 

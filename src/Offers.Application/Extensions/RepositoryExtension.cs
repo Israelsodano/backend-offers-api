@@ -11,12 +11,10 @@ namespace Offers.Application.Extensions
     {
         public static IServiceCollection ConfigureRepository(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddSingleton(x => new DbContextOptionsBuilder<OffersContext>()
-            //        .UseSqlServer(configuration.GetConnectionString("SqlServer")).Options);
-
             services.AddSingleton(x => new DbContextOptionsBuilder<OffersContext>()
-                    .UseSqlite(configuration.GetConnectionString("Sqlite")).Options);
+                    .UseSqlServer(configuration.GetConnectionString("SqlServer")).Options);
 
+           
             services.AddRepositoryServices(cfg => { 
                 cfg.AddUnit<University, OffersContext>();
                 cfg.AddUnit<Campus, OffersContext>();
