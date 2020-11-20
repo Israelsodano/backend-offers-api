@@ -1,0 +1,29 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["src/Offers.Api/Offers.Api.csproj", "src/Offers.Api/"]
+COPY ["src/Common/Common.Versioning/Common.Versioning.csproj", "src/Common/Common.Versioning/"]
+COPY ["src/Common/Common.Swagger/Common.Swagger.csproj", "src/Common/Common.Swagger/"]
+COPY ["src/Offers.Application/Offers.Application.csproj", "src/Offers.Application/"]
+COPY ["src/Common/Common.Utils/Common.Utils.csproj", "src/Common/Common.Utils/"]
+COPY ["src/Offers.Domain/Offers.Domain.csproj", "src/Offers.Domain/"]
+COPY ["src/Common/Common.Repository/Common.Repository.csproj", "src/Common/Common.Repository/"]
+COPY ["src/Common/Common.Result/Common.Result.csproj", "src/Common/Common.Result/"]
+RUN dotnet restore "src/Offers.Api/Offers.Api.csproj"
+COPY . .
+WORKDIR "/src/src/Offers.Api"
+RUN dotnet build "Offers.Api.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Offers.Api.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Offers.Api.dll"]

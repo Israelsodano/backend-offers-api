@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.Repository\Common.Repository.csproj" />
+    <ProjectReference Include="..\Common\Common.Result\Common.Result.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\University\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Responses\University\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Enums.NET" Version="3.0.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>
