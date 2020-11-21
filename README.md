@@ -6,7 +6,7 @@ A solução foi construída com base em docker-compose.
 
 Sendo assim, executaremos nossa aplicação com apenas 2 passos.
 
-- com o terminal abra a pasta raiz do projeto contendo nosso arquivo docker.compose.yml.
+- com o terminal abra a pasta raiz do projeto contendo nosso arquivo docker-compose.yml.
 - execute o comando "docker-compose up -d"
 
 ### Simples assim !!!
