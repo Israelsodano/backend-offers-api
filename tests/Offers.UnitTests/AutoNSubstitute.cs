@@ -8,6 +8,8 @@ using Common.Repository.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Offers.Api;
@@ -44,7 +46,10 @@ namespace Offers.UnitTests
 
             services.AddValidators();
             services.AddApplicationServices();
-            
+
+            services.AddSingleton<Microsoft.AspNetCore.Hosting.IHostingEnvironment, HostingEnvironmentStub>();
+
+
             services.AddTransient<UniversityHandler>();
             services.AddTransient<CampusHandler>();
             services.AddTransient<CourseHandler>();
