@@ -11,3 +11,5 @@ Sendo assim, executaremos nossa aplicação com apenas 2 passos.
 
 ### Simples assim !!!
 
+- nossa aplicação ja deve estar rodando na url: <a href="https://localhost:5001/swagger/index.html">https://localhost:5001/swagger</a> 
+
